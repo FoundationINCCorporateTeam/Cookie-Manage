@@ -1,0 +1,32 @@
+# Data files (runtime generated)
+/data/cookies/detected.json
+/data/cookies/categorized.json
+/data/consent/consent-log.jsonl
+
+# Temporary files
+/tmp/
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies (if using npm/composer in future)
+node_modules/
+vendor/
+
+# Build artifacts
+dist/
+build/
+
+# Environment files with secrets
+.env
+.env.local

@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0",
+  "roles": {
+    "admin": {
+      "name": "Administrator",
+      "permissions": [
+        "view_logs",
+        "edit_config",
+        "manage_users",
+        "export_data",
+        "import_data",
+        "reset_consent"
+      ]
+    },
+    "viewer": {
+      "name": "Viewer",
+      "permissions": [
+        "view_logs"
+      ]
+    }
+  }
+}

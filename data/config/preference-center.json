@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "layout": "popup",
+  "texts": {
+    "title": "Cookie Preferences",
+    "description": "Manage your cookie preferences. You can enable or disable different types of cookies below.",
+    "save": "Save Preferences",
+    "cancel": "Cancel"
+  },
+  "categories": {
+    "necessary": {
+      "name": "Strictly Necessary",
+      "description": "These cookies are essential for the website to function properly. They cannot be disabled.",
+      "enabled": true,
+      "locked": true
+    },
+    "preferences": {
+      "name": "Preference Cookies",
+      "description": "These cookies allow the website to remember choices you make and provide enhanced features.",
+      "enabled": false,
+      "locked": false
+    },
+    "analytics": {
+      "name": "Analytics Cookies",
+      "description": "These cookies help us understand how visitors interact with our website.",
+      "enabled": false,
+      "locked": false
+    },
+    "marketing": {
+      "name": "Marketing Cookies",
+      "description": "These cookies are used to track visitors across websites to display relevant advertisements.",
+      "enabled": false,
+      "locked": false
+    }
+  },
+  "showAdvancedMode": true
+}
