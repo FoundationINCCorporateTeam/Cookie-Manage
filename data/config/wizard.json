@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "completed": false,
+  "currentStep": 1,
+  "steps": {
+    "jurisdiction": {
+      "selected": "gdpr",
+      "options": ["gdpr", "ccpa", "custom"]
+    },
+    "categories": {
+      "necessary": true,
+      "preferences": true,
+      "analytics": true,
+      "marketing": true
+    },
+    "bannerLayout": "popup",
+    "preferenceCenterLayout": "popup",
+    "customization": {},
+    "blocking": {},
+    "consentProof": {
+      "enabled": true,
+      "anonymize": true
+    }
+  }
+}

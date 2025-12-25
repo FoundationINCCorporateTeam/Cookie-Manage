@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Management Platform - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    🍪 Cookie Management Platform
+                </h1>
+                <p class="mt-2 text-sm text-gray-600">
+                    Privacy-first, GDPR-compliant cookie consent management
+                </p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <!-- Welcome Section -->
+            <div class="px-4 py-6 sm:px-0">
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Welcome to the Demo</h2>
+                    <p class="text-gray-700 mb-4">
+                        This page demonstrates the Cookie Management Platform (CMP) in action.
+                        The CMP automatically handles cookie consent, blocking, and compliance.
+                    </p>
+                    <div class="bg-blue-50 border border-blue-200 rounded p-4">
+                        <h3 class="font-semibold text-blue-900 mb-2">Features Demonstrated:</h3>
+                        <ul class="list-disc list-inside text-blue-800 space-y-1">
+                            <li>Automatic cookie banner display on first visit</li>
+                            <li>Accept All, Reject All, and Customize options</li>
+                            <li>Consent state persistence in localStorage</li>
+                            <li>Script blocking based on category</li>
+                            <li>Consent logging to backend</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Integration Instructions -->
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Integration</h2>
+                    <p class="text-gray-700 mb-4">
+                        To integrate the CMP into your website, add this single line to your HTML:
+                    </p>
+                    <div class="bg-gray-900 text-gray-100 rounded p-4 mb-4 overflow-x-auto">
+                        <code>&lt;script src="/src/js/cmp.js" data-site-id="YOUR_SITE_ID" data-api-base="/api"&gt;&lt;/script&gt;</code>
+                    </div>
+                    <p class="text-sm text-gray-600">
+                        Replace <code class="bg-gray-100 px-2 py-1 rounded">YOUR_SITE_ID</code> with your unique site identifier.
+                    </p>
+                </div>
+
+                <!-- Consent Status -->
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Current Consent Status</h2>
+                    <div id="consent-status" class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-medium">Strictly Necessary</span>
+                            <span id="consent-necessary" class="px-3 py-1 rounded text-sm">Loading...</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-medium">Preferences</span>
+                            <span id="consent-preferences" class="px-3 py-1 rounded text-sm">Loading...</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-medium">Analytics</span>
+                            <span id="consent-analytics" class="px-3 py-1 rounded text-sm">Loading...</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-medium">Marketing</span>
+                            <span id="consent-marketing" class="px-3 py-1 rounded text-sm">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex gap-3">
+                        <button onclick="CMP.resetConsent()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                            Reset Consent
+                        </button>
+                        <button onclick="showConsentDetails()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                            Show Details
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Script Blocking Demo -->
+                <div class="bg-white rounded-lg shadow p-6 mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Script Blocking Demo</h2>
+                    <p class="text-gray-700 mb-4">
+                        These scripts are categorized and will only execute if you consent to their category:
+                    </p>
+                    
+                    <!-- Analytics Script Example -->
+                    <div class="bg-gray-50 p-4 rounded mb-3">
+                        <h3 class="font-semibold mb-2">Analytics Script</h3>
+                        <code class="text-sm">&lt;script type="text/plain" data-category="analytics"&gt;</code>
+                        <div id="analytics-status" class="mt-2 text-sm">
+                            <span class="font-medium">Status:</span> <span class="text-gray-600">Checking...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Marketing Script Example -->
+                    <div class="bg-gray-50 p-4 rounded">
+                        <h3 class="font-semibold mb-2">Marketing Script</h3>
+                        <code class="text-sm">&lt;script type="text/plain" data-category="marketing"&gt;</code>
+                        <div id="marketing-status" class="mt-2 text-sm">
+                            <span class="font-medium">Status:</span> <span class="text-gray-600">Checking...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-2xl font-semibold mb-4">Quick Links</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="/admin" class="block p-4 border border-gray-300 rounded hover:border-blue-500 hover:shadow">
+                            <h3 class="font-semibold text-lg mb-2">Admin Dashboard</h3>
+                            <p class="text-sm text-gray-600">Manage consent logs, settings, and customization</p>
+                        </a>
+                        <a href="/admin/wizard.html" class="block p-4 border border-gray-300 rounded hover:border-blue-500 hover:shadow">
+                            <h3 class="font-semibold text-lg mb-2">Setup Wizard</h3>
+                            <p class="text-sm text-gray-600">Configure your cookie banner step-by-step</p>
+                        </a>
+                        <a href="https://github.com" target="_blank" class="block p-4 border border-gray-300 rounded hover:border-blue-500 hover:shadow">
+                            <h3 class="font-semibold text-lg mb-2">Documentation</h3>
+                            <p class="text-sm text-gray-600">Learn how to implement and customize</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load CMP SDK -->
+    <script src="/src/js/cmp.js" data-site-id="demo-site" data-api-base="/api"></script>
+    <script src="/src/js/preference-center.js"></script>
+
+    <!-- Demo Page Scripts -->
+    <script>
+        // Update consent status display
+        function updateConsentDisplay() {
+            const consent = CMP.getConsent();
+            
+            if (consent) {
+                updateStatus('necessary', consent.necessary);
+                updateStatus('preferences', consent.preferences);
+                updateStatus('analytics', consent.analytics);
+                updateStatus('marketing', consent.marketing);
+            } else {
+                ['necessary', 'preferences', 'analytics', 'marketing'].forEach(category => {
+                    const el = document.getElementById('consent-' + category);
+                    el.textContent = 'Not Set';
+                    el.className = 'px-3 py-1 rounded text-sm bg-gray-300 text-gray-700';
+                });
+            }
+        }
+        
+        function updateStatus(category, accepted) {
+            const el = document.getElementById('consent-' + category);
+            if (accepted) {
+                el.textContent = '✓ Accepted';
+                el.className = 'px-3 py-1 rounded text-sm bg-green-100 text-green-800';
+            } else {
+                el.textContent = '✗ Rejected';
+                el.className = 'px-3 py-1 rounded text-sm bg-red-100 text-red-800';
+            }
+        }
+        
+        function showConsentDetails() {
+            const consent = CMP.consent;
+            if (consent) {
+                alert('Consent Details:\n\n' + JSON.stringify(consent, null, 2));
+            } else {
+                alert('No consent recorded yet.');
+            }
+        }
+        
+        // Listen for consent changes
+        window.addEventListener('cmp:consent-changed', () => {
+            updateConsentDisplay();
+        });
+        
+        // Listen for CMP initialization
+        window.addEventListener('cmp:initialized', () => {
+            updateConsentDisplay();
+        });
+        
+        // Update on page load if CMP is already initialized
+        if (window.CMP && CMP.initialized) {
+            updateConsentDisplay();
+        }
+    </script>
+
+    <!-- Analytics Demo Script (blocked by default) -->
+    <script type="text/plain" data-category="analytics">
+        console.log('Analytics script executed!');
+        document.getElementById('analytics-status').innerHTML = 
+            '<span class="font-medium">Status:</span> <span class="text-green-600">✓ Executed</span>';
+    </script>
+
+    <!-- Marketing Demo Script (blocked by default) -->
+    <script type="text/plain" data-category="marketing">
+        console.log('Marketing script executed!');
+        document.getElementById('marketing-status').innerHTML = 
+            '<span class="font-medium">Status:</span> <span class="text-green-600">✓ Executed</span>';
+    </script>
+</body>
+</html>

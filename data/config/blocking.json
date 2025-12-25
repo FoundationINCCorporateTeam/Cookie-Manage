@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "enabled": true,
+  "strictMode": true,
+  "blockingMethods": {
+    "scriptInterception": true,
+    "cookieDeletion": true,
+    "deferredExecution": true
+  },
+  "rules": {
+    "necessary": {
+      "block": false,
+      "scripts": []
+    },
+    "preferences": {
+      "block": true,
+      "scripts": []
+    },
+    "analytics": {
+      "block": true,
+      "scripts": [
+        "google-analytics.com",
+        "googletagmanager.com",
+        "analytics.js",
+        "ga.js"
+      ]
+    },
+    "marketing": {
+      "block": true,
+      "scripts": [
+        "facebook.net",
+        "doubleclick.net",
+        "ads.js",
+        "marketing"
+      ]
+    }
+  },
+  "whitelist": [],
+  "blacklist": []
+}

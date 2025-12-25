@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script Blocking Example - Cookie Management Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen py-12">
+    <div class="max-w-4xl mx-auto px-4">
+        <h1 class="text-3xl font-bold mb-8">Script Blocking Examples</h1>
+        
+        <!-- Status Display -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Script Execution Status</h2>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                    <span class="font-medium">Strictly Necessary Script</span>
+                    <span id="status-necessary" class="text-gray-500">Not executed</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                    <span class="font-medium">Preferences Script</span>
+                    <span id="status-preferences" class="text-gray-500">Not executed</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                    <span class="font-medium">Analytics Script (Google Analytics Simulation)</span>
+                    <span id="status-analytics" class="text-gray-500">Not executed</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                    <span class="font-medium">Marketing Script (Facebook Pixel Simulation)</span>
+                    <span id="status-marketing" class="text-gray-500">Not executed</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Code Examples -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">How to Block Scripts by Category</h2>
+            
+            <div class="space-y-6">
+                <!-- Example 1: Always Execute (Necessary) -->
+                <div>
+                    <h3 class="font-semibold mb-2 text-green-700">✓ Strictly Necessary (Never Blocked)</h3>
+                    <p class="text-sm text-gray-600 mb-2">Essential scripts that are always allowed to run:</p>
+                    <div class="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
+                        <code>&lt;script&gt;<br>
+  // This script always executes<br>
+  console.log('Necessary script executed');<br>
+&lt;/script&gt;</code>
+                    </div>
+                </div>
+                
+                <!-- Example 2: Preferences -->
+                <div>
+                    <h3 class="font-semibold mb-2 text-yellow-700">⚠ Preference Cookies (Blocked Until Consent)</h3>
+                    <p class="text-sm text-gray-600 mb-2">Use <code class="bg-gray-100 px-2 py-1 rounded">type="text/plain"</code> and <code class="bg-gray-100 px-2 py-1 rounded">data-category="preferences"</code>:</p>
+                    <div class="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
+                        <code>&lt;script type="text/plain" data-category="preferences"&gt;<br>
+  // This only executes if user accepts preferences<br>
+  console.log('Preferences script executed');<br>
+  localStorage.setItem('theme', 'dark');<br>
+&lt;/script&gt;</code>
+                    </div>
+                </div>
+                
+                <!-- Example 3: Analytics -->
+                <div>
+                    <h3 class="font-semibold mb-2 text-blue-700">📊 Analytics (Blocked Until Consent)</h3>
+                    <p class="text-sm text-gray-600 mb-2">Block analytics scripts like Google Analytics:</p>
+                    <div class="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
+                        <code>&lt;script type="text/plain" data-category="analytics"&gt;<br>
+  // Simulate Google Analytics<br>
+  console.log('Analytics script executed');<br>
+  // Your actual GA code would go here<br>
+  // gtag('config', 'GA_MEASUREMENT_ID');<br>
+&lt;/script&gt;</code>
+                    </div>
+                </div>
+                
+                <!-- Example 4: Marketing -->
+                <div>
+                    <h3 class="font-semibold mb-2 text-purple-700">🎯 Marketing (Blocked Until Consent)</h3>
+                    <p class="text-sm text-gray-600 mb-2">Block marketing and advertising scripts:</p>
+                    <div class="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
+                        <code>&lt;script type="text/plain" data-category="marketing"&gt;<br>
+  // Simulate Facebook Pixel<br>
+  console.log('Marketing script executed');<br>
+  // Your actual FB Pixel code would go here<br>
+  // fbq('init', 'YOUR_PIXEL_ID');<br>
+&lt;/script&gt;</code>
+                    </div>
+                </div>
+                
+                <!-- Example 5: External Scripts -->
+                <div>
+                    <h3 class="font-semibold mb-2 text-red-700">🌐 External Scripts (Also Blocked)</h3>
+                    <p class="text-sm text-gray-600 mb-2">Block external scripts using <code class="bg-gray-100 px-2 py-1 rounded">src</code> attribute:</p>
+                    <div class="bg-gray-900 text-gray-100 p-4 rounded text-sm overflow-x-auto">
+                        <code>&lt;script type="text/plain" data-category="analytics" src="https://www.googletagmanager.com/gtag/js?id=GA_ID"&gt;&lt;/script&gt;<br><br>
+&lt;script type="text/plain" data-category="marketing" src="https://connect.facebook.net/en_US/fbevents.js"&gt;&lt;/script&gt;</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Test -->
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Interactive Test</h2>
+            <p class="text-gray-600 mb-4">
+                Click the buttons below to test consent states. Watch the "Script Execution Status" above to see which scripts execute.
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <button onclick="testAcceptAll()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                    Accept All & Reload
+                </button>
+                <button onclick="testRejectAll()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">
+                    Reject All & Reload
+                </button>
+                <button onclick="testCustom()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    Accept Analytics Only & Reload
+                </button>
+                <button onclick="CMP.resetConsent()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+                    Reset Consent & Reload
+                </button>
+            </div>
+        </div>
+        
+        <!-- Best Practices -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h2 class="text-xl font-semibold mb-4 text-blue-900">Best Practices</h2>
+            <ul class="space-y-2 text-blue-800">
+                <li class="flex items-start">
+                    <span class="mr-2">✓</span>
+                    <span>Always categorize scripts correctly based on their purpose</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="mr-2">✓</span>
+                    <span>Never block essential functionality with <code class="bg-blue-100 px-2 py-1 rounded">type="text/plain"</code></span>
+                </li>
+                <li class="flex items-start">
+                    <span class="mr-2">✓</span>
+                    <span>Test thoroughly: Accept All, Reject All, and partial consent scenarios</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="mr-2">✓</span>
+                    <span>Document which scripts belong to which category</span>
+                </li>
+                <li class="flex items-start">
+                    <span class="mr-2">✓</span>
+                    <span>Update blocking rules when adding new tracking scripts</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Load CMP SDK -->
+    <script src="/src/js/cmp.js" data-site-id="blocking-demo" data-api-base="/api"></script>
+    <script src="/src/js/preference-center.js"></script>
+
+    <!-- Necessary Script (Always Executes) -->
+    <script>
+        console.log('✓ Necessary script executed');
+        document.getElementById('status-necessary').textContent = '✓ Executed';
+        document.getElementById('status-necessary').className = 'text-green-600 font-semibold';
+    </script>
+
+    <!-- Preferences Script (Blocked Until Consent) -->
+    <script type="text/plain" data-category="preferences">
+        console.log('✓ Preferences script executed');
+        document.getElementById('status-preferences').textContent = '✓ Executed';
+        document.getElementById('status-preferences').className = 'text-green-600 font-semibold';
+        localStorage.setItem('preferences-test', 'executed');
+    </script>
+
+    <!-- Analytics Script (Blocked Until Consent) -->
+    <script type="text/plain" data-category="analytics">
+        console.log('✓ Analytics script executed (simulated Google Analytics)');
+        document.getElementById('status-analytics').textContent = '✓ Executed';
+        document.getElementById('status-analytics').className = 'text-green-600 font-semibold';
+        
+        // Simulate analytics tracking
+        window.analyticsData = {
+            pageView: true,
+            timestamp: new Date().toISOString()
+        };
+    </script>
+
+    <!-- Marketing Script (Blocked Until Consent) -->
+    <script type="text/plain" data-category="marketing">
+        console.log('✓ Marketing script executed (simulated Facebook Pixel)');
+        document.getElementById('status-marketing').textContent = '✓ Executed';
+        document.getElementById('status-marketing').className = 'text-green-600 font-semibold';
+        
+        // Simulate marketing pixel
+        window.marketingPixel = {
+            loaded: true,
+            timestamp: new Date().toISOString()
+        };
+    </script>
+
+    <!-- Test Functions -->
+    <script>
+        function testAcceptAll() {
+            if (window.CMP) {
+                CMP.updateConsent({
+                    necessary: true,
+                    preferences: true,
+                    analytics: true,
+                    marketing: true
+                });
+                setTimeout(() => location.reload(), 500);
+            }
+        }
+        
+        function testRejectAll() {
+            if (window.CMP) {
+                CMP.updateConsent({
+                    necessary: true,
+                    preferences: false,
+                    analytics: false,
+                    marketing: false
+                });
+                setTimeout(() => location.reload(), 500);
+            }
+        }
+        
+        function testCustom() {
+            if (window.CMP) {
+                CMP.updateConsent({
+                    necessary: true,
+                    preferences: false,
+                    analytics: true,
+                    marketing: false
+                });
+                setTimeout(() => location.reload(), 500);
+            }
+        }
+        
+        // Update status on page load based on current consent
+        window.addEventListener('cmp:initialized', () => {
+            const consent = CMP.getConsent();
+            if (consent) {
+                console.log('Current consent state:', consent);
+                
+                // Update blocked scripts status
+                if (!consent.preferences) {
+                    document.getElementById('status-preferences').textContent = '✗ Blocked';
+                    document.getElementById('status-preferences').className = 'text-red-600 font-semibold';
+                }
+                if (!consent.analytics) {
+                    document.getElementById('status-analytics').textContent = '✗ Blocked';
+                    document.getElementById('status-analytics').className = 'text-red-600 font-semibold';
+                }
+                if (!consent.marketing) {
+                    document.getElementById('status-marketing').textContent = '✗ Blocked';
+                    document.getElementById('status-marketing').className = 'text-red-600 font-semibold';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
